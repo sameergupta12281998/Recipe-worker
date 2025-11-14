@@ -13,8 +13,6 @@ Recipe submission via REST API
 
 Image upload (multipart → base64)
 
-Publishes recipe messages to RabbitMQ
-
 2️⃣ Worker Service
 
 Listens to RabbitMQ and:
