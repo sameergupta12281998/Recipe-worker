@@ -130,10 +130,7 @@ class RecipeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(upd)))
                 .andExpect(status().isOk());
-                // .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                // .andExpect(jsonPath("$.title").value("New Title"));
-    
-     //   verify(recipeService, times(1)).updateRecipe(eq(id), any(RecipeUpdateRequest.class), anyString());
+        
     }
     
     // ---------------- delete ----------------
@@ -145,20 +142,16 @@ class RecipeControllerTest {
 
         mockMvc.perform(delete("/api/recipes/{id}", id))
                 .andExpect(status().isNoContent());
-
-   //     verify(recipeService, times(1)).deleteRecipe(eq(id), anyString());
     }
 
-    // ---------------- list (pagination + filters) ----------------
     @Test
     @WithMockUser(roles = {"CHEF"})
     void listRecipes_invokesService_and_returnsPaged() throws Exception {
-        // Build a RecipeResponse DTO to return in the page
         RecipeResponse r = new RecipeResponse();
         r.setId(UUID.randomUUID());
         r.setTitle("A");
 
-        // meta map must match your PagedResponse meta structure
+
         Map<String,Object> meta = Map.of(
                 "page", 0,
                 "page_size", 20,
@@ -184,20 +177,11 @@ class RecipeControllerTest {
                         .param("page_size", "20")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-                // meta.page is under "meta.page" in the returned JSON
-        //         .andExpect(jsonPath("$.meta.page").value(0))
-        //         // first item title is under data[0].title
-        //         .andExpect(jsonPath("$.data[0].title").value("A"));
-
-        // verify(recipeService, times(1)).searchRecipes(
-        //         anyString(), anyString(), anyString(), anyString(), anyString(), anyInt(), anyInt(), anyString(), anyString()
-        // );
     }
 
     // ---------------- get image ----------------
     @Test
     void getImage_file_exists_returnsBytes() throws Exception {
-        // create temp storage and file
         Path base = Paths.get("./data/storage");
         Files.createDirectories(base);
         Path f = base.resolve("test-image.jpg");
@@ -207,7 +191,6 @@ class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Content-Type", Matchers.containsString("image")));
 
-        // cleanup
         Files.deleteIfExists(f);
     }
 
