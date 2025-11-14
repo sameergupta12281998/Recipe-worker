@@ -51,7 +51,6 @@ class AuthControllerTest {
         mockUser.setEmail("new@example.com");
         Role r = new Role();
         r.setName("ROLE_USER");
-        // adapt to your User entity: if it has setRole use that, otherwise setRoles(...)
         mockUser.setRole(r);
 
         when(userService.createUser(anyString(), anyString(), anyString(), anyString()))
