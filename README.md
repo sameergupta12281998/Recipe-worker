@@ -15,7 +15,6 @@ Image upload (multipart → base64)
 
 2️⃣ Worker Service
 
-Listens to RabbitMQ and:
 
 Decodes images
 
